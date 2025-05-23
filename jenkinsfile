@@ -23,7 +23,7 @@ pipeline {
                     emailext attachmentsPattern: 'build.log',
                         to: "mychi82003@gmail.com",
                         subject: "Testing Status Email",
-                        body: "Test was successful, view logs at ${env.BUILD_URL}console"
+                        body: "Test was successful"
                 }
             }
         }
@@ -41,7 +41,7 @@ pipeline {
                     emailext attachmentsPattern: 'build.log',
                         to: "mychi82003@gmail.com",
                         subject: "Security Scan Status Email",
-                        body: "Scan was successful, view logs at ${env.BUILD_URL}console"
+                        body: "Scan was successful"
                 }
             }
         }
