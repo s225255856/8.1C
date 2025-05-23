@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DIRECTORY_PATH = 'true'
-        BUILD_URL  = 'true'
+        BUILD_URL  = 'log.txt'
         PRODUCTION_ENVIRONMENT = 'production environment'
     }
     
@@ -23,7 +23,7 @@ pipeline {
                 success{
                     mail to: "mychi82003@gmail.com",
                     subject: "Testing status email",
-                    body: "Test was successful, log: ${currentBuild.fullDisplayName}"
+                    body: "Test was successful, view logs for ${currentBuild.fullDisplayName} at: ${env.BUILD_URL}console"
                 }
             }
         }
@@ -40,7 +40,7 @@ pipeline {
                 success{
                     mail to: "mychi82003@gmail.com",
                     subject: "Security Scan status email",
-                    body: "Scan was successful, view logs at: ${env.BUILD_URL}console"
+                    body: "Scan was successful, view logs for ${currentBuild.fullDisplayName} at: ${env.BUILD_URL}console"
                 }
             }
         }
