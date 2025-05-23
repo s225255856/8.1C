@@ -24,7 +24,7 @@ pipeline {
                     mail to: "mychi82003@gmail.com",
                     subject: "Testing status email",
                     body: "Test was successful
-                    log:"
+                    log: ${currentBuild.fullDisplayName}"
                 }
             }
         }
@@ -42,7 +42,7 @@ pipeline {
                     mail to: "mychi82003@gmail.com",
                     subject: "Security Scan status email",
                     body: "Scan was successful
-                    log: "
+                    log: ${currentBuild.fullDisplayName}"
                 }
             }
         }
