@@ -23,7 +23,8 @@ pipeline {
                 success{
                     mail to: "mychi82003@gmail.com",
                     subject: "Testing status email",
-                    body: "Test was successful"
+                    body: "Test was successful
+                    log:"
                 }
             }
         }
@@ -40,7 +41,8 @@ pipeline {
                 success{
                     mail to: "mychi82003@gmail.com",
                     subject: "Security Scan status email",
-                    body: "Scan was successful"
+                    body: "Scan was successful
+                    log: "
                 }
             }
         }
