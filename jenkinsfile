@@ -20,11 +20,12 @@ pipeline {
             }
             post {
                 success {
-                    emailext debug: true, to: "mychi82003@gmail.com",
-                        subject: "Testing Status Email",
-                        body: "Test was successful"
+                    mail to: "mychi82003@gmail.com",
+                        subject: "Build Status",
+                        body: "Build completed successfully!"
                 }
             }
+
         }
         stage('Code analysis') {
             steps {
