@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DIRECTORY_PATH = 'true'
-        TESTING_ENVIRONMENT  = 'true'
+        BUILD_URL  = 'true'
         PRODUCTION_ENVIRONMENT = 'production environment'
     }
     
@@ -38,10 +38,9 @@ pipeline {
             }
             post{
                 success{
-                    emailext attachLog:true,
                     to: "mychi82003@gmail.com",
                     subject: "Security Scan status email",
-                    body: "Scan was successful, log: ${currentBuild.fullDisplayName}"
+                    body: "Scan was successful, view logs at: ${env.BUILD_URL}console"
                 }
             }
         }
