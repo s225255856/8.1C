@@ -20,7 +20,7 @@ pipeline {
             }
             post {
                 success {
-                    emailext attachmentsPattern: 'build.log',
+                    emailext
                         to: "mychi82003@gmail.com",
                         subject: "Testing Status Email",
                         body: "Test was successful"
@@ -38,21 +38,11 @@ pipeline {
             }
             post {
                 success {
-                    emailext attachmentsPattern: 'build.log',
+                    emailext
                         to: "mychi82003@gmail.com",
                         subject: "Security Scan Status Email",
-                        body: "Scan was successful"
+                        body: "Scan was successful ${env.BUILD_URL}"
                 }
-            }
-        }
-        stage('Save Build Log') {
-            steps {
-                sh 'curl -s ${env.BUILD_URL}consoleText > build.log'
-            }
-        }
-        stage('Archive Build Log') {
-            steps {
-                archiveArtifacts artifacts: 'build.log', fingerprint: true
             }
         }
         stage('Deploy to Staging') {
