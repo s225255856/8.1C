@@ -20,8 +20,7 @@ pipeline {
             }
             post {
                 success {
-                    emailext
-                        to: "mychi82003@gmail.com",
+                    emailext to: "mychi82003@gmail.com",
                         subject: "Testing Status Email",
                         body: "Test was successful"
                 }
@@ -38,8 +37,7 @@ pipeline {
             }
             post {
                 success {
-                    emailext
-                        to: "mychi82003@gmail.com",
+                    emailext to: "mychi82003@gmail.com",
                         subject: "Security Scan Status Email",
                         body: "Scan was successful ${env.BUILD_URL}"
                 }
