@@ -3,7 +3,6 @@ pipeline {
 
     environment {
         DIRECTORY_PATH = 'true'
-        BUILD_URL  = 'log.txt'
         PRODUCTION_ENVIRONMENT = 'production environment'
     }
     
@@ -19,11 +18,12 @@ pipeline {
                 echo 'Unit tests using mocha'
                 echo 'Integration tests using mocha'
             }
-            post{
-                success{
-                    mail to: "mychi82003@gmail.com",
-                    subject: "Testing status email",
-                    body: "Test was successful, view logs for ${currentBuild.fullDisplayName} at: ${env.BUILD_URL}console"
+            post {
+                success {
+                    emailext attachmentsPattern: 'build.log',
+                        to: "mychi82003@gmail.com",
+                        subject: "Testing Status Email",
+                        body: "Test was successful, view logs at ${env.BUILD_URL}console"
                 }
             }
         }
@@ -36,12 +36,23 @@ pipeline {
             steps {
                 echo 'Scanning for security using OpenVAS'
             }
-            post{
-                success{
-                    mail to: "mychi82003@gmail.com",
-                    subject: "Security Scan status email",
-                    body: "Scan was successful, view logs for ${currentBuild.fullDisplayName} at: ${env.BUILD_URL}console"
+            post {
+                success {
+                    emailext attachmentsPattern: 'build.log',
+                        to: "mychi82003@gmail.com",
+                        subject: "Security Scan Status Email",
+                        body: "Scan was successful, view logs at ${env.BUILD_URL}console"
                 }
+            }
+        }
+        stage('Save Build Log') {
+            steps {
+                sh 'curl -s ${env.BUILD_URL}consoleText > build.log'
+            }
+        }
+        stage('Archive Build Log') {
+            steps {
+                archiveArtifacts artifacts: 'build.log', fingerprint: true
             }
         }
         stage('Deploy to Staging') {
