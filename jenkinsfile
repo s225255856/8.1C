@@ -36,11 +36,20 @@ pipeline {
                 echo 'Scanning for security using OpenVAS'
             }
             post {
-                success {
-                    emailext to: "mychi82003@gmail.com",
-                        subject: "Security Scan Status Email",
-                        body: "Scan was successful ${env.BUILD_URL}"
+                script {
+                    def logSize = sh(script: "stat --printf='%s' build.log", returnStdout: true).trim().toInteger()
+                    if (logSize < 5000000) { // Limit to 5MB (adjust as needed)
+                        emailext attachmentsPattern: 'build.log',
+                            to: "mychi82003@gmail.com",
+                            subject: "Build Notification",
+                            body: "Build completed successfully. Check logs at ${env.BUILD_URL}console"
+                    } else {
+                        emailext to: "mychi82003@gmail.com",
+                            subject: "Build Notification - Log Too Large",
+                            body: "Build completed successfully, but the log size (${logSize} bytes) exceeds the limit. View logs at ${env.BUILD_URL}console"
+                    }
                 }
+
             }
         }
         stage('Deploy to Staging') {
