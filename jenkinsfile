@@ -20,7 +20,7 @@ pipeline {
             }
             post {
                 success {
-                    emailext to: "mychi82003@gmail.com",
+                    emailext debug: true, to: "mychi82003@gmail.com",
                         subject: "Testing Status Email",
                         body: "Test was successful"
                 }
