@@ -11,13 +11,13 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Fetch the source code from the directory path specified by the environment variable'
-                echo 'Compile the code and generate any necessary artefacts'
+                echo 'Compile the code and generate any necessary artefacts using VSC'
             }
         }
         stage('Uni and Integration Test') {
             steps {
-                echo 'Unit tests!'
-                echo 'Integration tests'
+                echo 'Unit tests using mocha'
+                echo 'Integration tests using mocha'
             }
             post{
                 success{
@@ -29,12 +29,12 @@ pipeline {
         }
         stage('Code analysis') {
             steps {
-                echo 'Analysing code'
+                echo 'Analysing code using SonarQube'
             }
         }
         stage('Security Scan') {
             steps {
-                echo 'Scanning for security'
+                echo 'Scanning for security using OpenVAS'
             }
             post{
                 success{
@@ -46,17 +46,17 @@ pipeline {
         }
         stage('Deploy to Staging') {
             steps {
-                echo 'Deploying to staging server'
+                echo 'Deploying to staging server using AWS'
             }
         }
         stage('Integration Tests on Staging') {
             steps {
-                echo 'Integration testing on staging server'
+                echo 'Integration testing on staging server using AWS'
             }
         }
         stage('Deploy to Production') {
             steps {
-                echo "Deploy to ${env.PRODUCTION_ENVIRONMENT}"
+                echo "Deploy to ${env.PRODUCTION_ENVIRONMENT} using AWS"
             }
         }
     }
