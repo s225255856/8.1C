@@ -44,12 +44,12 @@ pipeline {
             steps {
                 echo "Deploy to ${env.PRODUCTION_ENVIRONMENT}"
             }
-        }
-        post{
-            success{
-                mail to: "mychi82003@gmail.com",
-                subject: "Build status email",
-                body: "Build was successful and deployed"
+            post{
+                success{
+                    mail to: "mychi82003@gmail.com",
+                    subject: "Build status email",
+                    body: "Build was successful and deployed"
+                }
             }
         }
     }
