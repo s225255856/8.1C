@@ -19,6 +19,13 @@ pipeline {
                 echo 'Unit tests!'
                 echo 'Integration tests'
             }
+            post{
+                success{
+                    mail to: "mychi82003@gmail.com",
+                    subject: "Testing status email",
+                    body: "Test was successful"
+                }
+            }
         }
         stage('Code analysis') {
             steps {
@@ -28,6 +35,13 @@ pipeline {
         stage('Security Scan') {
             steps {
                 echo 'Scanning for security'
+            }
+            post{
+                success{
+                    mail to: "mychi82003@gmail.com",
+                    subject: "Security Scan status email",
+                    body: "Scan was successful"
+                }
             }
         }
         stage('Deploy to Staging') {
@@ -43,13 +57,6 @@ pipeline {
         stage('Deploy to Production') {
             steps {
                 echo "Deploy to ${env.PRODUCTION_ENVIRONMENT}"
-            }
-            post{
-                success{
-                    mail to: "mychi82003@gmail.com",
-                    subject: "Build status email",
-                    body: "Build was successful and deployed"
-                }
             }
         }
     }
