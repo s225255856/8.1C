@@ -40,6 +40,11 @@ pipeline {
                 echo 'Integration testing on staging server'
             }
         }
+        stage('Call Alex') {
+            steps {
+                echo 'Calling Alex'
+            }
+        }
         stage('Deploy to Production') {
             steps {
                 echo "Deploy to ${env.PRODUCTION_ENVIRONMENT}"
