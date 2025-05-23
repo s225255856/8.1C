@@ -38,7 +38,7 @@ pipeline {
             }
             post{
                 success{
-                    to: "mychi82003@gmail.com",
+                    mail to: "mychi82003@gmail.com",
                     subject: "Security Scan status email",
                     body: "Scan was successful, view logs at: ${env.BUILD_URL}console"
                 }
