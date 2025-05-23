@@ -36,6 +36,13 @@ pipeline {
             steps {
                 echo 'Scanning for security using OpenVAS'
             }
+            post {
+                success {
+                    mail to: "mychi82003@gmail.com",
+                        subject: "Security Scan Status",
+                        body: "Scan completed successfully! Check logs at ${env.BUILD_URL}console"
+                }
+            }
         }
         stage('Deploy to Staging') {
             steps {
