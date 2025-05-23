@@ -15,8 +15,8 @@ pipeline {
         }
         stage('Uni and Integration Test') {
             steps {
-                echo 'Unit tests using mocha'
-                echo 'Integration tests using mocha'
+                echo 'Unit testing using mocha'
+                echo 'Integration testing using mocha'
             }
             post {
                 success {
