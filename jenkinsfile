@@ -16,7 +16,7 @@ pipeline {
         stage ('Save build log') {
             steps {
                 script {
-                    sh 'echo "Build log" > build.log'
+                    bat 'echo "Build log" > build.log'
                     archiveArtifacts artifacts: 'build.log', fingerprint: true
                 }
             }
