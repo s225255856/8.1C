@@ -29,7 +29,7 @@ pipeline {
             post {
                 success {
                     emailtext {
-                        to: 'mychi82003@gmail.com',
+                        to: "mychi82003@gmail.com",
                         subject: "Unit and Integration Test",
                         body: "Testing completed successfully! See attached build log for details.",
                         attachmentsPattern: '**/build.log',
