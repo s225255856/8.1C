@@ -13,16 +13,28 @@ pipeline {
                 echo 'Compile the code and generate any necessary artefacts using VSC'
             }
         }
-        stage('Uni and Integration Test') {
+        stage ('Save build log') {
+            steps {
+                script {
+                    sh 'echo "Build log" > build.log'
+                    archiveArtifacts artifacts: 'build.log', fingerprint: true
+                }
+            }
+        }
+        stage('Unit and Integration Test') {
             steps {
                 echo 'Unit testing using mocha'
                 echo 'Integration testing using mocha'
             }
             post {
                 success {
-                    mail to: "mychi82003@gmail.com",
-                        subject: "Build Status",
-                        body: "Build completed successfully! Check logs at ${env.BUILD_URL}console"
+                    emailtext {
+                        to: 'mychi82003@gmail.com',
+                        subject: "Unit and Integration Test",
+                        body: "Testing completed successfully! See attached build log for details.",
+                        attachmentsPattern: '**/build.log',
+                        mimeType: 'text/plain'
+                    }
                 }
             }
 
